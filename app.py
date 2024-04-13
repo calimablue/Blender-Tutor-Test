@@ -22,7 +22,7 @@ def analyze_text(text="A stopwatch", desiredTime=5, skillLevel = "Beginner", pro
 
     # Instructions for the AI (adjust if needed)
     messages = [
-        {"role": "system", "content": "You are an assistant who helps generate inspiring and instructive Blender modeling project ideas."},
+        {"role": "system", "content": "You are an assistant who helps generate inspiring and instructive Blender modeling project ideas. When designing projects, please ensure the difficulty aligns with their reported skill level, the generated project can reasonably be completed in their desired amount of time, and that the subject matter and project type (e.g. model or animation) aligns with what was requested."},
         {"role": "user", "content": f"Please generate a new Blender project plan for me. I would like the output to include the following sections: 1. **PROJECT OVERVIEW** - Provide a detailed list including the project name, subject matter, estimated difficulty, estimated completion time, and some engaging background flavor text to get me excited about the project. 2. **REQUIRED SKILLS** - List the specific Blender skills required for this project, such as sculpting, texturing, animating, scripting, instancing, modifiers, and retopology. 3. **RECOMMENDED STEPS** - Please provide a detailed guide for creating a simple {projectType} in Blender. Each step should include specific objectives, essential Blender tools or techniques to be used, and expert advice to help me optimize my workflow and achieve professional results. Additionally, include tailored advice for each step to help me navigate through the complexities of the suggested project. /n I am currently a {skillLevel} in Blender looking for an approximately {desiredTime} hour project that features {text} as the subject matter."}
     ]
 
@@ -55,8 +55,8 @@ desired_project_time = st.sidebar.slider("Desired Time in Hours", 0, 100, 5)
 skill_level = st.sidebar.selectbox("Your Skill Level", ["Beginner", "Intermediate", "Advanced"])
 project_type = st.sidebar.selectbox("Your Desired Project Type", ["Animation", "Model"])
 
-if st.button('Generating Project Outline Content'):
-    with st.spinner('Generating Text...'):
+if st.button('Generate My Project Idea'):
+    with st.spinner('Generating Project Outline Content...'):
         post_text = analyze_text(user_input, desired_project_time, skill_level, project_type)
         st.write(post_text)
 
